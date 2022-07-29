@@ -128,8 +128,13 @@ if __name__ == '__main__':
     import argparse
     parser = argparse.ArgumentParser()
 
-    parser.add_argument('--url', type=str, help='poet url in Aldiwan')
+    parser.add_argument('--url', type=str,
+                        help='poet url in Aldiwan', required=True)
     parser.add_argument('--output', type=str,
-                        default='output.json', help='output file')
+                        default='poets.json', help='output/input json file')
 
     args = parser.parse_args()
+
+    scraper = AldiwanScraper(args.output)
+    scraper.scrape_poems(args.url)
+    scraper.to_json()
