@@ -60,7 +60,7 @@ def scrape_poem_text(poem_soup: BeautifulSoup):
     return text
 
 
-def scrape_poems_classes(poet_soup: BeautifulSoup):
+def scrape_poems_tags(poet_soup: BeautifulSoup):
     """
     iven a poet BeautifulSoup object, poems classes.
     """
@@ -95,23 +95,26 @@ class AldiwanScraper:
         self.poets[poet_name] = {'name': poet_name, 'poems': {}}
 
         # scrape poet's poems
-        poems_classes = scrape_poems_classes(poet_soup)
-        for poem_class in tqdm(poems_classes):
-            poem_dict = {}
+        poems_tags = scrape_poems_tags(poet_soup)
+        for poem_tag in tqdm(poems_tags):
+            self.scrape_poem(poem_tag, poet_name)
 
-            # get poem soup
-            poem_url = os.path.join(self.base_url, poem_class.get('href'))
-            poem_soup = soup_from_url(poem_url)
-
-            # store poem fields
-            poem_title = poem_class.text.strip()
-            poem_dict['title'] = poem_title
-            poem_dict['source'] = poem_url
-            poem_dict['author'] = poet_name
-            poem_dict['text'] = scrape_poem_text(poem_soup)
-
-            self.poets[poet_name]['poems'][poem_title] = poem_dict
         return self.poets[poet_name]
+
+    def scrape_poem(self, poem_tag, poet_name: str):
+        # get poem soup
+        poem_url = os.path.join(self.base_url, poem_tag.get('href'))
+        poem_soup = soup_from_url(poem_url)
+
+        # store poem fields
+        poem_dict = {}
+        poem_title = poem_tag.text.strip()
+        poem_dict['title'] = poem_title
+        poem_dict['source'] = poem_url
+        poem_dict['author'] = poet_name
+        poem_dict['text'] = scrape_poem_text(poem_soup)
+        self.poets[poet_name]['poems'][poem_title] = poem_dict
+        return
 
     def to_json(self):
         """
