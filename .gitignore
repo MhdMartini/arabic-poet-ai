@@ -2,3 +2,4 @@ cred.json
 scrape.ipynb
 del.*
 poets.json
+*.json
