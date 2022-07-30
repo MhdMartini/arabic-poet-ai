@@ -71,9 +71,9 @@ class AldiwanScraper:
     def __init__(self, json_path: str = 'poets.json'):
         self.base_url = 'https://www.aldiwan.net/'
         self.json_path = json_path
-        self.poets = self.get_poets()
+        self.poets = self.from_json()
 
-    def get_poets(self):
+    def from_json(self):
         """
         Get poets from a json file if any
         """
@@ -113,6 +113,7 @@ class AldiwanScraper:
         poem_dict['source'] = poem_url
         poem_dict['author'] = poet_name
         poem_dict['text'] = scrape_poem_text(poem_soup)
+        poem_dict['language'] = 'arabic'
         self.poets[poet_name]['poems'][poem_title] = poem_dict
         return
 
