@@ -4,10 +4,6 @@ from firebase_admin import firestore
 import json
 import os
 
-project_id = "starlit-byway-357721"
-cred = "cred.json"
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = cred
-
 
 if __name__ == '__main__':
     import argparse
