@@ -3,3 +3,6 @@ cred.json
 del.*
 poets.json
 *.json
+*.txt
+__pycache__
+training_checkpoints/*
