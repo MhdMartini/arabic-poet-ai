@@ -1,3 +1,3 @@
-# nizar-quabbani
+# arabic-poet-ai
 
-A bot that composes poetry inspired by the great Syrian poet, Nizar Quabbani
+A bot that composes Arabic poetry by standing on the shoulders of poetry giants.
