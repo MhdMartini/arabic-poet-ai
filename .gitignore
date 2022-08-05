@@ -1,5 +1,6 @@
 cred.json
 *.ipynb
+!aldiwan_clean_0.ipynb
 del.*
 poets.json
 *.json
